@@ -1,0 +1,109 @@
+﻿@using System.Globalization
+@* @await Component.InvokeAsync("Cart") *@
+@model PetShop.ViewModles.CartSummaryModel
+<header class="main-header">
+    <!-- Start Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+        <div class="container">
+            <!-- Start Header Navigation -->
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="https://localhost:7254/"><img src="https://localhost:7254//images/logo.png" /></a>
+            </div>
+            <!-- End Header Navigation -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li class="nav-item active"><a class="nav-link" href="https://localhost:7254/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://localhost:7254/Home/About">About Us</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Shop</a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-controller="Pets" asp-action="Index">Sidebar Shop</a></li>
+                            <li><a asp-action="Detail" asp-controller="Pets" >Shop Detail</a></li>
+                            <li><a asp-action="Index" asp-controller="Cart">Cart</a></li>
+                            
+                            
+                            
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Account</a>
+                        <ul class="dropdown-menu">
+                            <li> <a asp-action="Register" asp-controller="User">Register Here</a></li>
+                            <li><a asp-action="Login" asp-controller="User">Login</a></li>
+                            <li><a asp-action="Logout" asp-controller="User">Logout</a></li>
+                            <li><a asp-action="Profile" asp-controller="User">Profile</a></li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li><a href="@Url.Action("Index", "Admin")">Admin</a></li>
+                            }
+                           
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" asp-action="Contact" asp-controller="Home">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+            <!-- Start Atribute Navigation -->
+            <div class="attr-nav">
+                <ul>
+                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                    <li class="side-menu">
+                        <a href="#">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span class="badge">@Model.TotalQuantity</span>
+                            <p>My Cart</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Atribute Navigation -->
+        </div>
+        <!-- Start Side Menu -->
+        <div class="side">
+            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+            <li class="cart-box">
+                <ul class="cart-list">
+                    @foreach (var item in Model.Items)
+                    {
+                        <li>
+                            <a href="#" class="photo"><img src="https://localhost:7254/images/pet/@item.ImageUrl" class="cart-thumb" alt="" /></a>
+                            <h6><a asp-action="Detail" asp-controller="Pets" asp-route-id="@item.Id">@item.Name</a></h6>
+
+                            @* Định dạng giá *@
+                            @{
+                                var price = item.Price.ToString("C0", new CultureInfo("vi-VN"));
+                                if (price.EndsWith(".00"))
+                                {
+                                    price = price.Substring(0, price.Length - 3);
+                                }
+                            }
+                            <p>1x - <span class="price">@price</span></p>
+                        </li>
+                    }
+
+                    @* Tính toán và định dạng tổng giá trị giỏ hàng *@
+                    @{
+                        var total = Model.TotalValue.ToString("C0", new CultureInfo("vi-VN"));
+                        if (total.EndsWith(".00"))
+                        {
+                            total = total.Substring(0, total.Length - 3);
+                        }
+                    }
+
+                    <li class="total">
+                        <a asp-action="Index" asp-controller="Cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                        <span class="float-right"><b>Total</b> @total</span>
+                    </li>
+                </ul>
+
+            </li>
+        </div>
+        <!-- End Side Menu -->
+
+    </nav>
+    <!-- End Navigation -->
+</header>

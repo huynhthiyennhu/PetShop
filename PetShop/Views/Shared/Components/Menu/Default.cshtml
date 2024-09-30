@@ -1,0 +1,15 @@
+﻿
+@model IEnumerable<PetShop.ViewModles.Menu>
+<div class="filter-sidebar-left">
+    <div class="title-left">
+        <h3>Categories</h3>
+    </div>
+    <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
+       @foreach(var item in Model){
+            <a asp-controller="Pets" asp-action="index" asp-route-PetTypeID="@item.PetTypeId" class="list-group-item list-group-item-action">
+                @item.TypeName  <small class="text-muted">(@item.Quantity)</small>
+            </a>
+        }
+       
+    </div>
+</div>

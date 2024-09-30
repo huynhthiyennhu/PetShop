@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>ProFile</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                    <li class="breadcrumb-item active">Shop Detail </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Start Shop Detail  -->
+<div class="shop-detail-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-5 col-md-6">
+                <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active"> <img height="300" class="d-block w-100" src="~/images/user.jpg" alt="First slide"> </div>
+                       
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-7 col-md-6">
+                <div class="product-item-filter row ">
+                    <h1>ProFile</h1>
+                </div>
+                <div>
+                    <div >
+                        <h1><b>User ID:</b> @Model.UserId</h1>
+                    </div>
+                    <div >
+                        <h2><b>User Name:</b> @Model.UserName</h2>
+                    </div>
+                    <div >
+                        <h2><b>Full Name:</b> @Model.FullName</h2>
+                    </div>
+                    <div >
+                        <h2><b>Email:</b> @Model.Email</h2>
+                    </div>
+                    <div >
+                        <h2><b>Phone Number:</b> @Model.PhoneNumber</h2>
+                    </div>
+
+                    <div >
+                        <h2><b>Address:</b> @Model.Address</h2>
+                    </div>
+                   
+                    
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+
+       
+
+    </div>
+
+
+<!-- End Cart -->

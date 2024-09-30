@@ -1,0 +1,9 @@
+﻿@model IEnumerable<PetShop.ViewModles.PetVM>
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_LayoutPets.cshtml";
+}
+
+<h1><b>There are @Model.Count() products.</b></h1>
+
+@await Html.PartialAsync("PetItem", Model)

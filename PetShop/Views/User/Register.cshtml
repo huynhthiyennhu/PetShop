@@ -1,0 +1,63 @@
+﻿@model PetShop.ViewModles.RegisterVM
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<div class="products-box">
+    <div class="container">
+        <div class="checkout-address">
+            <div class="title-left">
+                <h3>Register</h3>
+            </div>
+            <form class="needs-validation"  asp-action="Register">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="@Model.Email"></label><sup>*</sup>
+                        <input type="text" class="form-control" asp-for="@Model.Email">
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="@Model.PhoneNumber"></label><sup>*</sup>
+                        <input type="text" class="form-control" asp-for="@Model.PhoneNumber">
+                        <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="@Model.UserName"></label><sup>*</sup>
+                        <input type="text" class="form-control" asp-for="@Model.UserName">
+                        <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="@Model.Password"></label><sup>*</sup>
+                        <input type="text" class="form-control" asp-for="@Model.Password">
+                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="@Model.FullName"></label><sup>*</sup>
+                        <input type="text" class="form-control" asp-for="@Model.FullName">
+                        <span asp-validation-for="@Model.FullName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="@Model.Address"></label><sup>*</sup>
+                        <input type="text" class="form-control" asp-for="@Model.Address">
+                        <span asp-validation-for="@Model.Address" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="container text-center"> <button type="submit" class=" text-uppercase w-100  btn hvr-hover "><p style="color:white">Register</p></button> </div>
+               
+            </form>
+        </div>
+    </div>
+   
+</div>
+

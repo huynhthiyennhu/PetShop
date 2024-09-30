@@ -1,0 +1,39 @@
+﻿@model PetShop.ViewModles.LoginVM
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<div class="products-box">
+    <div class="container">
+        <div class="checkout-address">
+            <div class="title-left col-md-6 mb-3 container">
+                <h3>Login</h3>
+            </div>
+            <form class="needs-validation" asp-action="Login" asp-route-ReturnUrl="@ViewBag.ReturnUrl">
+                <div class="text-danger" asp-validation-summary="All"></div>
+                <div class="row">
+                    <div class="col-md-6 mb-3 container ">
+                        <label asp-for="@Model.UserName"></label><sup>*</sup>
+                        <input type="text" class="form-control" asp-for="@Model.UserName">
+                        <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-md-6 mb-3 container ">
+                        <label asp-for="@Model.Password"></label><sup>*</sup>
+                        <input type="text" class="form-control" asp-for="@Model.Password">
+                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                    </div>
+                </div>
+
+                
+                <div class="container text-center col-md-6 mb-3"> <button type="submit" class=" text-uppercase w-100  btn hvr-hover "><p style="color:white">Login</p></button> </div>
+                <div class="container text-center col-md-6 mb-3"> <button asp-action="ForgotPassword" asp-controller="User" class=" text-uppercase w-100  btn hvr-hover "><p style="color:white">Forgot Password</p></button> </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,97 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@model X.PagedList.IPagedList<PetShop.Models.Pet>
+
+@{
+    ViewData["Title"] = "Pets";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<h1>Pets</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table" >
+    <thead style="background-color:#ccffcc">
+        <tr>
+            <th>STT</th>
+            <th>
+                Name
+            </th>
+            
+            <th>
+                Price
+            </th>
+            <th>
+                Breed
+            </th>
+            <th>
+               Age
+            </th>
+            <th>
+                
+                ImageUrl
+            </th>
+            <th>
+                IsAvailable
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+@foreach (var item in Model) {
+        <tr>
+            <td>@i</td>
+            <td class="border-bottom-0">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+           
+            <td class="border-bottom-0 ">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td class="border-bottom-0">
+                @Html.DisplayFor(modelItem => item.Breed)
+            </td>
+            <td class="border-bottom-0 ">
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td class="border-bottom-0 ">
+                    <img src="@Url.Content("~/" + item.ImageUrl)" alt="@item.Name"  width="70" height="70">
+            </td>
+            <td class="border-bottom-0" >
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+            </td>
+            <td class="border-bottom-0 text-nowrap">
+                    <a asp-action="Edit" asp-route-id="@item.PetId"> <i class="fas fa-edit"></i></a> 
+                    <a asp-action="Details" asp-route-id="@item.PetId"><i class="fas fa-info-circle"></i></a> 
+                    <a asp-action="Delete" asp-route-id="@item.PetId">  <i class="fas fa-trash-alt"></i></a>
+            </td>
+        </tr>
+        i++;
+}
+    </tbody>
+</table>
+
+
+<div class="d-flex justify-content-center">
+    @Html.PagedListPager(Model, page => Url.Action("Pets", new { page }), new PagedListRenderOptions
+    {
+        UlElementClasses = new List<string> { "pagination" },
+        LiElementClasses = new List<string> { "page-item" },
+        PageClasses = new List<string> { "page-link" },
+        
+        
+        LinkToPreviousPageFormat = "« Previous",
+        LinkToNextPageFormat = "Next »",
+        LinkToIndividualPageFormat = "{0}",
+       
+        EllipsesFormat = "...",
+    })
+</div>
+
+

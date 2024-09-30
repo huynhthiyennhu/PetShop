@@ -1,0 +1,29 @@
+﻿@model IEnumerable<PetShop.ViewModles.PetVM>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_LayoutPets";
+}
+
+ <!-- Start All Title Box -->
+ @section BreadCum {
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Shop</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Shop</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <!-- End All Title Box -->
+
+@await Html.PartialAsync("PetItem", Model)
+
+    
+

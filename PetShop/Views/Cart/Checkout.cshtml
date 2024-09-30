@@ -1,0 +1,154 @@
+﻿@using System.Globalization
+@model IEnumerable<PetShop.ViewModles.OrderItem>
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Checkout</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item active">Checkout</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start Cart  -->
+    <div class="cart-box-main">
+        <div class="container">
+           
+            <div class="row">
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="checkout-address">
+                        <div class="title-left">
+                            <h3>Billing address</h3>
+                        </div>
+                    <form class="needs-validation" asp-action="Checkout"  asp-controller="Cart" >
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input"  id="useAccountInfo" value="false">
+                            <label class="custom-control-label" for="useAccountInfo">Use my account information</label>
+                        </div>
+                        <div class="mb-3 delivery-info">
+                            <label >Name *</label>
+                            <input  class="form-control" placeholder="Enter your name" id="username" required>
+                            <div class="invalid-feedback" style="width: 100%;">Your name is required.</div>
+                        </div>
+                        <div class="mb-3 delivery-info">
+                            <label >Phone Number *</label>
+                            <input  class="form-control" placeholder="Enter your phone number" required>
+                            <div class="invalid-feedback">Please enter a valid phone number for shipping updates.</div>
+                        </div>
+                        <div class="mb-3 delivery-info">
+                            <label >Address *</label>
+                            <input  class="form-control" placeholder="Enter your address" required>
+                            <div class="invalid-feedback">Please enter your shipping address.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Place Order</button>
+                    </form>
+
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="shipping-method-box">
+                                <div class="title-left">
+                                    <h3>Shipping Method</h3>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="custom-control custom-radio">
+                                        <input id="shippingOption1" name="shipping-option" class="custom-control-input" checked="checked" type="radio">
+                                        <label class="custom-control-label" for="shippingOption1">Standard Delivery</label> <span class="float-right font-weight-bold">FREE</span> </div>
+                                    <div class="ml-4 mb-2 small">(3-7 business days)</div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="shippingOption2" name="shipping-option" class="custom-control-input" type="radio">
+                                        <label class="custom-control-label" for="shippingOption2">Express Delivery</label> <span class="float-right font-weight-bold">$10.00</span> </div>
+                                    <div class="ml-4 mb-2 small">(2-4 business days)</div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="shippingOption3" name="shipping-option" class="custom-control-input" type="radio">
+                                        <label class="custom-control-label" for="shippingOption3">Next Business day</label> <span class="float-right font-weight-bold">$20.00</span> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-12">
+                            <div class="odr-box">
+                                <div class="title-left">
+                                    <h3>Shopping cart</h3>
+                                </div>
+                            <div class="media mb-2 border-bottom">
+                                <div class="rounded p-2 bg-light">
+                                    
+                                    @foreach(var item in Model)
+                                    {
+                                        <div class="media mb-2 border-bottom">
+
+                                        @{var price = item.Price.ToString("C0", new CultureInfo("vi-VN"));
+                                        if (price.EndsWith(".00"))
+                                        {
+                                            price = price.Substring(0, price.Length - 3);
+                                        }}
+                                            <div class="media-body"> <a asp-action="Search" asp-route-id="@item.PetId"> @item.Name</a>
+                                                <div class="small text-muted">Price: @price <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: @price</div>
+                                            </div>
+                                        </div>
+                                    }
+                                    
+                                    </div>
+                                   
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-12">
+                            <div class="order-box">
+                                <div class="title-left">
+                                    <h3>Your order</h3>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="font-weight-bold">Product</div>
+                                    <div class="ml-auto font-weight-bold">Total</div>
+                                </div>
+                                <hr class="my-1">
+                                <div class="d-flex">
+                                    <h4>Sub Total</h4>
+                                @{var total = Model.Sum(p=>p.Price).ToString("C0", new CultureInfo("vi-VN"));
+                                    if (total.EndsWith(".00"))
+                                {
+                                        total = total.Substring(0, total.Length - 3);
+                                }}
+                                    <div class="ml-auto font-weight-bold"> @total </div>
+                                </div>
+                               
+                               
+                                </div>
+                        </div>
+                        <div class="col-12 d-flex shopping-box"> <a asp-action="Checkout" asp-controller="Cart" class="ml-auto btn hvr-hover">Place Order</a> </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- End Cart -->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#useAccountInfo").change(function () {
+                if ($(this).prop("checked")) {
+                    $(this).val(true);
+                    $(".delivery-info").addClass("d-none");
+                } else {
+                    $(this).val(false);
+                    $(".delivery-info").removeClass("d-none");
+                }
+            });
+        });
+    </script>
+}

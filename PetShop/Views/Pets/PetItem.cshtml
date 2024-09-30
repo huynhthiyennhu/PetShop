@@ -1,0 +1,92 @@
+﻿@using System.Globalization
+@model IEnumerable<PetShop.ViewModles.PetVM>
+
+<div class="product-categorie-box">
+    <div class="tab-content">
+
+        <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                        <div class="products-single fix">
+                            <div class="box-img-hover">
+                                <a asp-action="Detail" asp-controller="Pets" asp-route-id="@item.PetId">
+                                    <img height="300" width="300" src="https://localhost:7254/images/pet/@item.ImageUrl" alt="@item.Name">
+                                </a>
+                                
+                                <div class="mask-icon">
+
+                                    <a class="cart add-to-cart" href="javascript:void(0);" data-id="@item.PetId">Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="why-text">
+                                <a asp-action="Detail" asp-controller="Pets" asp-route-id="@item.PetId">
+                                    <h4>@item.Name</h4>
+                                    @{
+                                        var price = item.Price.ToString("C0", new CultureInfo("vi-VN"));
+                                        if (price.EndsWith(".00"))
+                                        {
+                                            price = price.Substring(0, price.Length - 3);
+                                        }
+                                    }
+                                   
+                                    <h5>@price</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="list-view">
+            <div class="list-view-box">
+                @foreach (var item in Model)
+                {
+                    <div class="row">
+
+                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                            <div class="products-single fix">
+                                <div class="box-img-hover">
+                                    <div class="type-lb">
+                                        <p class="new">New</p>
+                                    </div>
+                                    <img src="https://localhost:7254/images/pet/@item.ImageUrl" class="img-fluid" alt="Image">
+                                    <div class="mask-icon">
+                                        <ul>
+                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
+                            <div class="why-text full-width">
+                                 <a asp-action="Detail" asp-controller="Pets" asp-route-id="@item.PetId">
+                                    <h4>@item.Name</h4>
+                                    <!-- <h5> <del>$ 60.00</del> $40.79</h5>-->
+                                    @{
+                                        var price = item.Price.ToString("C0", new CultureInfo("vi-VN"));
+                                        if (price.EndsWith(".00"))
+                                        {
+                                            price = price.Substring(0, price.Length - 3);
+                                        }
+                                    }
+                                    <h5>@price</h5>
+                                    <h2>Breed: @item.Breed</h2>
+                                </a>
+                                <p>@item.Description</p>
+                                <a class="btn hvr-hover" asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.PetId">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+    </div>
+</div>

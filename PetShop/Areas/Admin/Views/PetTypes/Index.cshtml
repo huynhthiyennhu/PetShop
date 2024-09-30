@@ -1,0 +1,69 @@
+﻿@model IEnumerable<PetShop.Models.PetType>
+
+@{
+    ViewData["Title"] = "PetTypes";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>PetType</h1>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<a asp-area="Admin" asp-action="Create" asp-controller="PetTypes">Create New</a>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<table class="table mb-0 align-middle">
+    <thead class="text-dark fs-4" style="background-color:#ccffcc">
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">@i</h6>
+
+                </td>
+                <td class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">@Html.DisplayFor(modelItem => item.TypeName)</h6>
+
+                </td>
+                <td class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">@Html.DisplayFor(modelItem => item.Description)</h6>
+
+                </td>
+                <td class="border-bottom-0 text-nowrap">
+                    <a asp-action="Edit" asp-route-id="@item.PetTypeId" asp-controller="PetTypes"><i class="fas fa-edit"></i></a> 
+                    <a asp-action="Details" asp-route-id="@item.PetTypeId" asp-controller="PetTypes"><i class="fas fa-info-circle"></i></a> 
+                    <a asp-action="Delete" asp-route-id="@item.PetTypeId" asp-controller="PetTypes">  <i class="fas fa-trash-alt"></i></a>
+                    
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
